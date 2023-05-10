@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box;
+}
+
 body {
   color: #777;
 }
@@ -58,4 +62,34 @@ div.post p.summary{
   text-align: justify;
   text-justify: inter-word;
   /* width: 50%; */
+}
+
+form.login {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+input {
+  display: block;
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 5px 7px;
+  background-color: #eee;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  display: block;
+  border-radius: 5px;
+  background-color: #555;
+  border-radius: 5px;
+  color: #fff;
+  border: 1px solid ;
+  padding: 7px 0;
+}
+
+form h2 {
+  text-align: left;
 }

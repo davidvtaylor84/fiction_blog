@@ -7,7 +7,7 @@ const Header = () => {
         <Link to="/"><h1>the surfeit handle</h1></Link>
         <nav>
           <Link to="/login">Login</Link>
-          {/* <a href="">Register</a> */}
+          <Link to="/register">Register</Link>
         </nav>
     </header>
   )
