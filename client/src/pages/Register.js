@@ -15,25 +15,24 @@ const Register = () => {
 
     async function handleRegisterSubmit(e){
         e.preventDefault();
-        try{
-            await fetch('http://localhost:4000/register', {
+        await fetch('http://localhost:4000/register', {
             method: 'POST',
             body: JSON.stringify({username, password}),
-            headers: {'Content-Type':'application/json'}
+            headers: {'Content-Type': 'application/json'},
         })
-        }
-        catch(e){
-            console.log(e);
-            alert('Registration failed');
-        }
-        
     }
 
   return (
     <form className='login' onSubmit={handleRegisterSubmit}>
         <h2>Register</h2>
-        <input type="text" placeholder='username' value={username} onChange={handleUsernameChange}/>
-        <input type="password" placeholder='the code' value={password} onChange={handlePasswordChange}/>
+        <input type="text" 
+            placeholder='username' 
+            value={username} 
+            onChange={handleUsernameChange}/>
+        <input type="password" 
+            placeholder='the code' 
+            value={password} 
+            onChange={handlePasswordChange}/>
         <button>Submit</button>
     </form>
   )
