@@ -4,9 +4,11 @@ import {Route, Routes} from "react-router-dom";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import Register from './pages/Register';
+import { UserContextProvider } from './UserContext';
 
 function App() {
   return (
+    <UserContextProvider>
     <Routes>
       <Route path="/" element={<Layout/>}>
         <Route index element={<HomePage/>}/>
@@ -14,6 +16,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
       </Route>
     </Routes>
+    </UserContextProvider>
   );
 }
 
