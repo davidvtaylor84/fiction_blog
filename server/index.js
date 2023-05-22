@@ -94,6 +94,12 @@ app.get('/post', async(req, res)=>{
         .limit(20));
 });
 
+app.get('/post/:id', async(req, res)=>{
+    const {id} = req.params;
+    const postDoc = await Post.findById(id);
+    res.json(postDoc);
+})
+
 const port = 4000;
 
 app.listen(port, ()=>{
