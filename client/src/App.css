@@ -40,6 +40,10 @@ header nav {
   gap: 15px;
 }
 
+header nav a{
+  cursor: pointer;
+}
+
 div.post {
   display: grid;
   grid-template-columns: 1fr;

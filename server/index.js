@@ -11,6 +11,7 @@ const multer = require('multer');
 const uploadMulterMiddleware = multer({dest: 'uploads/'});
 const fs = require('fs');
 
+
 const salt = bcrypt.genSaltSync(10);
 const secret = 'jfuyfgiugoghohijbuytyrvytdvdbjfug7687';
 
@@ -76,16 +77,44 @@ app.post('/post', uploadMulterMiddleware.single('file'), async (req, res)=>{
     const ext = parts[parts.length - 1];
     const newPath = path+'.'+ext
     fs.renameSync(path, newPath);
-    const {title, summary, content} = req.body;
 
-    const postDoc = await Post.create({
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, async(err, info)=>{
+        if(err) throw err;
+        const {title, summary, content} = req.body;
+        const postDoc = await Post.create({
         title,
         summary,
         content,
         image: newPath,
     })
     res.json(postDoc);
+    })
 });
+
+app.put('/post', uploadMulterMiddleware.single('file'), async (req, res)=>{
+    let newPath = null
+    if(req.file){
+        const {originalname, path} = req.file;
+        const parts = originalname.split('.');
+        const ext = parts[parts.length - 1];
+        newPath = path+'.'+ext
+        fs.renameSync(path, newPath);
+    }
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, async(err, info)=>{
+        if(err) throw err;
+        const {id, title, summary, content} = req.body;
+        const postDoc = await Post.findById(id);
+        await postDoc.updateOne({
+        title,
+        summary,
+        content,
+        image: newPath ? newPath : postDoc.image,
+    })
+    res.json(postDoc);
+    })
+})
 
 app.get('/post', async(req, res)=>{
     res.json(

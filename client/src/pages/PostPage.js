@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { format } from 'date-fns';
 import { UserContext } from '../UserContext';
 
@@ -29,7 +29,7 @@ const PostPage = () => {
         <div className='content' dangerouslySetInnerHTML={{__html: post.content}}/>
         {userInfo && (
             <div className='edit-row'>
-                <a className='edit-btn' href=''>Edit Post</a>
+                <Link className='edit-btn' to={`/edit/${post._id}`}>Edit Post</Link>
             </div>
         )}
         <time>{format(new Date(post.createdAt), 'dd-MM-yyyy')}</time>
