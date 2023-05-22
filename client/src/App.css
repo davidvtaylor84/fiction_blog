@@ -142,3 +142,17 @@ button {
 form h2 {
   text-align: left;
 }
+
+div.edit-row {
+  margin-top: 40px;
+  text-align: center;
+}
+
+div.post-page a.edit-btn {
+  background-color: #555;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}

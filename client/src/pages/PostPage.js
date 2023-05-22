@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { format } from 'date-fns';
+import { UserContext } from '../UserContext';
 
 const PostPage = () => {
+
+    const {userInfo} = useContext(UserContext);
 
     const [post, setPost] = useState(null);
     const {id} = useParams();
@@ -24,6 +27,11 @@ const PostPage = () => {
             <img src={`http://localhost:4000/${post.image}`}/>
         </div>
         <div className='content' dangerouslySetInnerHTML={{__html: post.content}}/>
+        {userInfo && (
+            <div className='edit-row'>
+                <a className='edit-btn' href=''>Edit Post</a>
+            </div>
+        )}
         <time>{format(new Date(post.createdAt), 'dd-MM-yyyy')}</time>
     </div>
   )
