@@ -11,13 +11,13 @@ const multer = require('multer');
 const uploadMulterMiddleware = multer({dest: 'uploads/'});
 const fs = require('fs');
 
-
 const salt = bcrypt.genSaltSync(10);
 const secret = 'jfuyfgiugoghohijbuytyrvytdvdbjfug7687';
 
 app.use(cors({credentials: true, origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
+app.use('/uploads', express.static(__dirname+ '/uploads'));
 
 mongoose.connect('mongodb+srv://davidvaldez84:societyisahole84@cluster0.ie8e5uf.mongodb.net/?retryWrites=true&w=majority')
 
@@ -85,7 +85,14 @@ app.post('/post', uploadMulterMiddleware.single('file'), async (req, res)=>{
         image: newPath,
     })
     res.json(postDoc);
-})
+});
+
+app.get('/post', async(req, res)=>{
+    res.json(
+        await Post.find()
+        .sort({createdAt: -1})
+        .limit(20));
+});
 
 const port = 4000;
 
